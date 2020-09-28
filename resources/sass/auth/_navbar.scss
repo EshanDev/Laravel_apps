@@ -1,0 +1,173 @@
+@import "../mixins/breakpoint";
+
+.auth-navbar {
+    display: flex;
+    width: 100%;
+    background: #ffffff;
+    height: 100%;
+    @include breakpoint(2000px, min)
+    {
+        margin-top: 50px;
+    }
+
+
+    a {
+        color: #6f6f6f;
+        text-decoration: none;
+
+        &:hover {
+            color: #363636;
+        }
+    }
+
+    .navbar-content {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+
+        .navbar-header {
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+
+            .icons::before {
+                font-size: 1.5em;
+                @include breakpoint(2000px, min)
+                {
+                    font-size: 1.8em;
+                }
+            }
+        }
+
+        .nav-links {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+            font-size: 18px;
+            font-weight: 300;
+            @include breakpoint(2000px, min)
+            {
+                font-size: 20px;
+            }
+
+            .links {
+                padding-left: .5rem;
+                padding-right: .5rem;
+
+            }
+
+            .links:last-of-type {
+                padding-right: 15px;
+            }
+        }
+
+        /* Main-Nav hidden only max 480px */
+
+        .nav-links {
+            @include breakpoint(480px, max) {
+                .hidden-sm {
+                    display: none;
+                }
+
+                .only-sm {
+                    display: inline;
+                    #toggleBTN{
+                        cursor: pointer;
+                    }
+
+                    .bar1,
+                    .bar2,
+                    .bar3 {
+                        width: 23px;
+                        height: 3px;
+                        background-color: #6f6f6f;
+                        margin: 5px 0;
+                        transition: .4s ease;
+                    }
+                    .change{
+                        .bar1{
+                            transform: rotate(-45deg) translate(-3px, 5px);
+                        }
+                        .bar2{
+                            opacity: 0;
+                        }
+                        .bar3{
+                            transform: rotate(45deg) translate(-6px, -8px);
+                        }
+                    }
+                }
+            }
+
+            @include breakpoint(480px, min) {
+                .hidden-sm {
+                    display: inline;
+                }
+
+                .only-sm {
+                    display: none;
+                }
+            }
+        }
+    }
+
+
+
+
+
+    /* Sidebar Visible only 480px*/
+    .sidebar {
+        @include breakpoint(480px, min) {
+            display: none;
+        }
+
+        position: fixed;
+        background: $white;
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.13);
+        height: 100%;
+        width: 270px;
+        left: 0;
+        top: 0;
+        transition: transform .4s ease;
+
+        &.isClose {
+            transform: translate3d(-270px, 0, 0);
+        }
+
+
+        .items.header {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            min-height: 50px;
+            color: $gray-500;
+            padding: 0 15px;
+        }
+
+        .nav-links {
+            display: block;
+
+            .items {
+                &:nth-of-type(3) {
+                    .links {
+                        border-bottom: 1px solid rgba(128, 128, 128, 0.14);
+                    }
+                }
+            }
+
+            .links {
+                border-top: 1px solid rgba(128, 128, 128, 0.14);
+                padding: 8px 15px;
+                display: block;
+            }
+        }
+    }
+
+
+
+
+}

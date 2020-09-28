@@ -1,0 +1,38 @@
+.auth{
+    &.check-register-data{
+        .content-body{
+                .box{
+                    padding: 15px;
+                    .grid-container{
+                        display: grid;
+                        grid-template-columns: 200px 1fr;
+                        grid-gap: 1em;
+                        margin: 0 auto;
+                        width: 80%;
+                    }
+
+                    .information-data{
+                        .form-group{
+                            padding: 0;
+                            margin: 0;
+                            line-height: 1;
+                            width: 100%;
+                            display: grid;
+                            input{
+                                width: 80%;
+                                border: transparent;
+                                font-size: 17px;
+                                font-weight: 200;
+                                color: rgba(117, 117, 117, 0.42);
+                                &:focus, &:active{
+                                    border: transparent;
+                                    outline: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+}

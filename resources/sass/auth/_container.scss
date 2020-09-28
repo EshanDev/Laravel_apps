@@ -1,0 +1,28 @@
+@import "../mixins/breakpoint";
+.auth{
+    &.container-fluid{
+
+        @include breakpoint(1200px, max)
+        {
+            @include breakpoint(900px, min)
+            {
+                width: 900px;
+                margin: 0 auto;
+            }
+        }
+
+        @include breakpoint(2000px, max)
+        {
+            @include breakpoint(1200px, min)
+            {
+                width: 1191px;
+                margin: 0 auto;
+            }
+        }
+        @include breakpoint(2000px, min)
+        {
+            width: 60%;
+            margin: 0 auto;
+        }
+    }
+}
