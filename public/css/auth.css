@@ -34,7 +34,7 @@ body header {
   display: flex;
   align-items: center;
 }
-@media (min-width: 2000px) {
+@media (min-width: 1900px) {
   body header {
     height: 100px;
   }
@@ -353,7 +353,7 @@ body.position-left {
   height: 100%;
   /* Sidebar Visible only 480px*/
 }
-@media (min-width: 2000px) {
+@media (min-width: 1900px) {
   .auth-navbar {
     margin-top: 50px;
   }

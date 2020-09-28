@@ -13,6 +13,7 @@
                 <div class="form-group">
                     <label for="student_email">ระบุที่อยู่อีเมล์</label>
                     <input type="email" class="form-control" name="student_email" id="student_email" value="{{old('student_email')}}" >
+					<span id="error_email"></span>
                 </div>
             </div>
             <div class="form-footer">
@@ -32,7 +33,8 @@
                 if(e.keyCode == 13){
                     return false;
                 }
-            })
+            });
+			
         })
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -67,6 +69,47 @@
 
            }
         });
+		
+					// Validate Email.
+$(document).ready(function(){
+
+ $('#student_email').blur(function(){
+  var error_email = '';
+  var email = $('#email').val();
+  var _token = $('input[name="_token"]').val();
+  var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if(!filter.test(email))
+  {    
+   $('#error_email').html('<label class="text-danger">Invalid Email</label>');
+   $('#email').addClass('has-error');
+   $('#register').attr('disabled', 'disabled');
+  }
+  else
+  {
+   $.ajax({
+    url:"{{ route('auth.verify.email') }}",
+    method:"POST",
+    data:{email:email, _token:_token},
+    success:function(result)
+    {
+     if(result == 'no_unique')
+     {
+      $('#error_email').html('<label class="text-success">Email Available</label>');
+      $('#email').removeClass('has-error');
+      $('#register').attr('disabled', false);
+     }
+     else
+     {
+      $('#error_email').html('<label class="text-danger">Email not Available</label>');
+      $('#email').addClass('has-error');
+      $('#register').attr('disabled', 'disabled');
+     }
+    }
+   })
+  }
+ });
+ 
+});
 
     </script>
 @endsection

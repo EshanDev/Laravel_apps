@@ -40,7 +40,7 @@ Route::name('auth.')->group(function(){
 
 
     // Verify Email Address
-    Route::post('/auth/verify_email', [AuthController::class, 'verify_email'])->name('verify.email');
+    Route::post('/auth/verify_email', [AuthController::class, 'Exists_email'])->name('verify.email');
 
 });
 
