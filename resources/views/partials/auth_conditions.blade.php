@@ -32,16 +32,41 @@
                 if(e.keyCode == 13){
                     return false;
                 }
-            });
-
-
-
+            })
         })
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
                 $(this).remove();
             });
         }, 5000);
+
+
+        // Validate Condition Form.
+        jQuery('.form').validate({
+           rules: {
+               student_code: {
+                   required: true,
+               },
+               student_email: {
+                   required: true,
+                   email: true,
+
+                   remote: {
+                       url: "{{route('auth.verify.email')}}",
+                       type: "post",
+
+                       data: {
+                           _token: function()
+                           {
+                               return "{{csrf_token()}}";
+                           }
+                       }
+                   }
+
+               }
+
+           }
+        });
 
     </script>
 @endsection

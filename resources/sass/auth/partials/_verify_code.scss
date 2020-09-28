@@ -6,7 +6,7 @@
             margin-bottom: 50px;
         }
         .content-header{
-            @include breakpoint(1200px, min){
+            @include breakpoint(2000px, min){
                 font-size: 3em;
             }
 

@@ -84,7 +84,7 @@ body.position-left {
 }
 @media (min-width: 780px) {
   .auth .content .content-header {
-    font-size: 2em;
+    font-size: 2.3em;
     line-height: 1.2;
     margin-bottom: 25px;
   }
@@ -254,7 +254,7 @@ body.position-left {
     margin-bottom: 50px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 2000px) {
   .auth .content .content-header {
     font-size: 3em;
   }
@@ -375,9 +375,15 @@ body.position-left {
   /* Main-Nav hidden only max 480px */
 }
 .auth-navbar .navbar-content .navbar-header {
-  font-size: 1.5em;
   display: flex;
   align-items: center;
+}
+.auth-navbar .navbar-content .navbar-header .text-navbar-brand {
+  font-size: 1.3em;
+  margin-left: 8px;
+}
+.auth-navbar .navbar-content .navbar-header i {
+  font-size: 1.5em;
 }
 .auth-navbar .navbar-content .navbar-header .icons::before {
   font-size: 1.5em;

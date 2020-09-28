@@ -120,6 +120,24 @@ class AuthController extends Controller
 
 
     // Verify Email
+
+    public function Exists_email(Request $request)
+    {
+		if ($request->input('student_email')) {
+			$email = $request->input('student_email');
+			$check = DB::table('serials')->where('email', $email)->first();
+			$count = $check->count();
+
+			if($count > 0){
+				echo 'not_unique';
+			} else{
+			    echo 'unique';
+            }
+
+    	}
+    }
+
+
     public function verify_email(Request $request)
     {
         if($request->input('student_email') !== ''){

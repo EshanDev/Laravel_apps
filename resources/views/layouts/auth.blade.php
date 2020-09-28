@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
@@ -19,10 +18,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/flaticons/flaticon.css') }}">
-    @yield('stylesheet')
+@yield('stylesheet')
 
 </head>
-
 <body id="body">
 
 
@@ -37,11 +35,10 @@
     </div>
 
 
-    <!-- Script -->
-    <script src="{{mix('js/app.js')}}"></script>
-    <script src="{{ asset('vendor/fontawesome/js/all.js') }}"></script>
-    <script src="{{ mix('js/validate.js') }}"></script>
-    @yield('script')
+<!-- Script -->
+<script src="{{mix('js/app.js')}}"></script>
+<script src="{{ asset('vendor/fontawesome/js/all.js') }}"></script>
+<script src="{{ asset('js/validate.js') }}"></script>
+@yield('script')
 </body>
-
 </html>

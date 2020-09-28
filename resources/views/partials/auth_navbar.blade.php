@@ -4,7 +4,7 @@
             <div class="navbar-brand">
                 <a href="{{route('auth.home')}}" class="navbar-header">
                     <i class="icons flaticon-id-card"></i>
-                    <div style="margin-left: 8px"> ระบบสมาชิก</div>
+                    <div class="text-navbar-brand"> ระบบสมาชิก</div>
                 </a>
             </div>
             <div class="navbar-links">
