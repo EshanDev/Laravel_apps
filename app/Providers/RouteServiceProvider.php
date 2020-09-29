@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('auth')
                 ->middleware('web')
                 ->namespace($this->reg)
-                ->group(base_path('routes/authenticate.php'));
+                ->group(base_path('routes/reg.php'));
         });
     }
 
