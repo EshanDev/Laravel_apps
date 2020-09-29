@@ -1,4 +1,8 @@
 <?php
+
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+
 if(!function_exists('hello')) {
     function hello() {
         return "Hello Helper";
@@ -47,5 +51,11 @@ if(!function_exists('checkEmail')){
     function checkEmail($email){
         $Select_email = \Illuminate\Support\Facades\DB::table('serials')->where('email', $email)->first();
         return $Select_email;
+    }
+}
+
+if(!function_exists('url_query')){
+    function url_query($to, array $param = [], array $additional = []){
+        return Str::finish(url($to, $additional), '?') . Arr::query($param);
     }
 }

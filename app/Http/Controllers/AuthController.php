@@ -143,7 +143,8 @@ class AuthController extends Controller
     // Manual insert Registration code.
     public function putYourCode()
     {
-        return view('system.auth', ['route'=>'putYourCode']);
+       $url = url_query('verify', ['reg'=> 'code']);
+       return redirect($url);
     }
 
     public function request_reg_code(Request $request, $code)

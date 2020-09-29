@@ -2,7 +2,7 @@
     <div class="auth container-fluid">
         <div class="navbar-content">
             <div class="navbar-brand">
-                <a href="{{route('auth.home')}}" class="navbar-header">
+                <a href="{{ url('/auth') }}" class="navbar-header">
                     <i class="icons flaticon-id-card"></i>
                     <div class="text-navbar-brand"> ระบบสมาชิก</div>
                 </a>
@@ -17,7 +17,7 @@
                         </div>
                     </li>
                     <li class="items hidden-sm">
-                        <a href="{{route('auth.put.reg_code')}}" class="links">ลงทะเบียน</a>
+                        <a href="{{ route('reg.verify.code') }}" class="links">ลงทะเบียน</a>
                     </li>
                     <li class="items hidden-sm">
                         <a href="{{route('login')}}" class="links">ลงชื่อเข้าใช้</a>
@@ -29,10 +29,10 @@
                             {{config('app.name')}}
                         </li>
                         <li class="items">
-                            <a href="{{route('auth.register')}}" class="links">Register</a>
+                            <a href="{{ route('reg.register') }}" class="links">Register</a>
                         </li>
                         <li class="items">
-                            <a href="{{route('login')}}" class="links">ลงชื่อเข้าใช้</a>
+                            <a href="{{ url('/auth/login') }}" class="links">ลงชื่อเข้าใช้</a>
                         </li>
                     </ul>
                 </div>

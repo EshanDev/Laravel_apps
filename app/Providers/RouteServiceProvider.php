@@ -29,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace ='App\Http\Controllers';
 
     protected $reference = 'App\Http\Controllers\Reference';
+    protected $reg = 'App\Http\Controllers\Reg';
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -48,15 +49,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::prefix('database')
+            Route::prefix('auth')
                 ->middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/database.php'));
-
-            Route::prefix('database')
-                ->middleware('web')
-                ->namespace($this->reference)
-                ->group(base_path('routes/test.php'));
+                ->namespace($this->reg)
+                ->group(base_path('routes/authenticate.php'));
         });
     }
 
