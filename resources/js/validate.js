@@ -22,6 +22,7 @@ $(condition).validate({
             required: true,
             number: true,
             maxlength: 10,
+            minlength: 10,
             remote:{
                 url: baseUrl + "/verify_student_code",
                 type: "get",
@@ -41,6 +42,7 @@ $(condition).validate({
             required: "กรุณากรอกรหัสนักศึกษา",
             number: "รูปแบบรหัสผ่านไม่ถูกต้อง",
             maxlength: "รูปแบบรหัสผ่านไม่ถูกต้อง",
+            minlength: "รูปแบบรหัสผ่านไม่ถูกต้อง",
             remote: "รหัสนักศึกษานี้ได้ลงทะเบียนแล้ว",
         },
         student_email: {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Auth;
 use App\Models\Serials;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -136,5 +137,17 @@ class AuthController extends Controller
         } else {
             echo 'true';
         }
+    }
+
+
+
+    public function registration_code($code)
+    {
+        $serials = Serials::where('serials', $code)->first();
+        foreach ($serials as $serial)
+        {
+            dd($serial);
+        }
+
     }
 }
