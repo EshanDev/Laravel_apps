@@ -17,7 +17,7 @@
                         </div>
                     </li>
                     <li class="items hidden-sm">
-                        <a href="{{route('auth.register')}}" class="links">ลงทะเบียน</a>
+                        <a href="{{route('auth.home')}}" class="links">ลงทะเบียน</a>
                     </li>
                     <li class="items hidden-sm">
                         <a href="{{route('login')}}" class="links">ลงชื่อเข้าใช้</a>

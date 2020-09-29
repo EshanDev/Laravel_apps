@@ -11,7 +11,7 @@ class Serials extends Model
 
 
     protected $fillable = [
-        'serials', 'count'
+        'serials', 'student_code', 'email',
     ];
 
 

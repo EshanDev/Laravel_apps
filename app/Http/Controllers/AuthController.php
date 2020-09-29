@@ -16,75 +16,85 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
 
-    // index Authentication
+    // Step one - index Authentication
     public function index()
     {
-        return view('system.auth', ['route'=>'default']);
+        return view('system.auth', ['route' => 'default']);
     }
 
 
+    // Step two - Create Serial Number and Redirect Student Code and Email Address to Registration Page.
+    public function store_registration_code(Request $request)
+    {
 
-    //Show the Registration Form.
+    }
+
+
+    public function send_registration_code(Request $request)
+    {
+        $rules = [
+            'student_code' => 'required|digits:10|string',
+            'student_email' => 'required|email|string|max:255',
+        ];
+        // Create Validator.
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()){
+            return back()->withInput()->withErrors(['fails'=>'ไม่สามารถดำเนินการได้ โปรดตรวจทานข้อมูลอีกครั้ง']);
+        } else{
+            $counts = CountSerials();
+            if ($counts == 30){
+                return back()->withInput()
+                    ->withErrors(['fails' => 'จำนวนผู้ลงทะเบียนครบแล้ว']);
+            } else{
+                $collection = collect(['student_code' => $request->input('student_code'), 'student_email' => $request->input('student_email')]);
+                $serial = getSerial();
+                $data = $collection->merge(['registration_code' => $serial]);
+
+                try {
+                    $serials = new Serials();
+                    $serials->serials = $data['registration_code'];
+                    $serials->email = $data['student_email'];
+                    $serials->student_code = $data['student_code'];
+                        $serials->save();
+                        return Redirect::route('auth.register')->with('send_code', $data);
+                } catch (\Exception $e){
+                    return back()->withInput()
+                        ->withErrors(['fails' => 'บันทึกข้อมูลไม่สำเร็จ ฐานข้อมูลเกิดข้อผิดพลาด']);
+                }
+            }
+        }
+    }
+
+
+    // Step three Receipt Student Code and Email Address from Step two and Show the Registration Form.
     public function show_register_form()
     {
 
-        if(Session::get('send_code')){
+        // Check Session
+        if (Session::get('send_code')) {
             $data = Session::get('send_code');
             $registration_code = getSerial();
             $username = generateUserName();
 
-            return view('system.auth', ['route'=>'register'], compact('data', 'registration_code', 'username'))->with('success', 'รหัสลงทะเบียนได้ส่งไปยังที่อยู่อีเมล์เรียบร้อย');
-        } else{
+            // If Session has send_code then return to Route Switch at register name with value.
+            return view('system.auth', ['route' => 'register'], compact('data', 'registration_code', 'username'))
+                ->with('success', 'รหัสลงทะเบียนได้ส่งไปยังที่อยู่อีเมล์เรียบร้อย');
+        } // If Not follow by condition form  return to normal view to Route Switch at register name without any value.
+        else {
             $data = [
-              'student_code' => null,
+                'student_code' => null,
                 'student_email' => null,
             ];
             $registration_code = null;
             $username = null;
-            return view('system.auth', ['route'=> 'register'], compact('data','registration_code', 'username'))->with('status', 'Profile updated!');;
+            return view('system.auth', ['route' => 'register'], compact('data', 'registration_code', 'username'));
         }
+
+
     }
 
 
-
     // Verify Registration Code and Redirect to Registration Page.
-
-
-    // Send Registration Code and Redirect to Registration Page.
-
-    public function send_registration_code(Request $request)
-        {
-            $collection = collect(['student_code' => $request->input('student_code'), 'student_email' => $request->input('student_email')]);
-            $serial = getSerial();
-            $data = $collection->merge(['registration_code' => $serial]);
-            $count = CountSerials();
-
-
-            // Create Validator.
-            $validator = Validator::make($request->all(), [
-               'student_code' => 'required|digits:10|string',
-               'student_email' => 'required|email|string|max:255',
-            ]);
-
-            // Check Error.
-            if($validator->fails())
-            {
-                return back()->withInput();
-            } else{
-                $insertData = new Serials();
-                $insertData->serials = $data['registration_code'];
-                $insertData->email = $data['student_email'];
-                if($count == 30){
-                    return back()->withErrors('จำนวนผู้ลงทะเบียบครบแล้ว');
-                } else{
-                    $insertData->save();
-                }
-            }
-            return Redirect::route('auth.register')->with('send_code', $data);
-        }
-
-
-
 
 
     public function verify_coded(Request $request)
@@ -103,55 +113,28 @@ class AuthController extends Controller
     }
 
 
-
-    // Check Confirmations Data Before Submit to databae.
-    public function confirmation (Request $request) {
-
-
-//        $data['confirmed'] = $request->except('_token');
-//        return view('system.auth', ['route'=>'confirmed'], $data);
-
-        dd($request->all());
-
-
-    }
-
-
-
-
     // Verify Email
-
-    public function Exists_email(Request $request)
-    {
-		if ($request->input('student_email')) {
-			$email = $request->input('student_email');
-			$check = DB::table('serials')->where('email', $email)->first();
-			$count = $check->count();
-
-			if($count > 0){
-				echo 'not_unique';
-			} else{
-			    echo 'unique';
-            }
-
-    	}
-    }
-
 
     public function verify_email(Request $request)
     {
-        if($request->input('student_email') !== ''){
-            if ($request->input('student_email')){
-                $rule = array('student_email' => 'required|email|unique:serials');
-                $validator = Validator::make($request->all(), $rule);
+        $Exists_email = Serials::all()->where('email', $request->input('student_email'))->first();
 
-                if (!$validator){
-                    die('true');
-                }
-            }
-        } die('false');
+        if ($Exists_email) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
     }
 
+    // Verify Student Code
 
-
+    public function verify_student_code(Request $request)
+    {
+        $Exists_code = Serials::all()->where('student_code', $request->input('student_code'))->first();
+        if ($Exists_code) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
+    }
 }

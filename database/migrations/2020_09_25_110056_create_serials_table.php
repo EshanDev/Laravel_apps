@@ -16,6 +16,7 @@ class CreateSerialsTable extends Migration
         Schema::create('serials', function (Blueprint $table) {
             $table->id();
             $table->string('serials')->nullable();
+            $table->string('student_code')->unique();
             $table->string('email')->unique();
             $table->timestamps();
         });
