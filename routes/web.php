@@ -45,7 +45,9 @@ Route::name('auth.')->group(function(){
     Route::get('/auth/verify_student_code', [AuthController::class, 'verify_student_code'])->name('verify.student.code');
 
 
-    Route::get('auth/registration_code/{code}', [AuthController::class, 'registration_code'])->name('get.registration.code');
+    // Manual Put Registration Code.
+    Route::get('/auth/verify/reg_code', [AuthController::class, 'putYourCode'])->name('put.reg_code');
+    Route::get('auth/verify?reg_code={code}', [AuthController::class, 'request_reg_code'])->name('get.registration.code');
 });
 
 Auth::Routes();

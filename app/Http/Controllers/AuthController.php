@@ -140,14 +140,14 @@ class AuthController extends Controller
     }
 
 
-
-    public function registration_code($code)
+    // Manual insert Registration code.
+    public function putYourCode()
     {
-        $serials = Serials::where('serials', $code)->first();
-        foreach ($serials as $serial)
-        {
-            dd($serial);
-        }
+        return view('system.auth', ['route'=>'putYourCode']);
+    }
 
+    public function request_reg_code(Request $request, $code)
+    {
+        return view('system.auth', ['route' => 'registration_code']);
     }
 }

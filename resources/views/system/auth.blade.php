@@ -18,6 +18,13 @@
         @include('.partials.verify_check')
         @break
 
+        @case('registration_code')
+        @include('.partials.auth_registration_code')
+        @break
+
+        @case('putYourCode')
+        @include('.partials.auth_put_registration_code')
+        @break
         @default
         @include('.partials.auth_content')
     @endswitch
